@@ -1,13 +1,13 @@
 # DotNetStandardSurvival
 
-##Dependency Injection
+## Dependency Injection
 
-###Install
+### Install
 
 ```
 install-package Microsoft.Extensions.DependencyInjection
 ```
-###Setup (console app)
+### Setup (console app)
 
 ```
 static void Main(string[] args)
@@ -21,7 +21,7 @@ static void Main(string[] args)
 }
 ```
 
-###Setup (web app)
+### Setup (web app)
 
 ```
 public void ConfigureServices(IServiceCollection services)
@@ -40,7 +40,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-###Explicit Use
+### Explicit Use
 
 ```
 var bar = serviceProvider.GetService<IBarService>();
