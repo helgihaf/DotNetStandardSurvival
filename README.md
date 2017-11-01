@@ -17,7 +17,7 @@ static void Main(string[] args)
                 .AddSingleton<IMySingleton, MySingleton>()
                 .BuildServiceProvider();
 
-    var agent = new MainAgent();
+    var t = serviceProvider.GetService<IMyTransient>();
 }
 ```
 
