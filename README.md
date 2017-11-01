@@ -4,12 +4,12 @@
 
 ### Install
 
-```
+```powershell
 install-package Microsoft.Extensions.DependencyInjection
 ```
 ### Setup (console app)
 
-```
+```c#
 static void Main(string[] args)
 {
     var serviceProvider = new ServiceCollection()
@@ -23,7 +23,7 @@ static void Main(string[] args)
 
 ### Setup (web app)
 
-```
+```c#
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddDbContext<ApplicationDbContext>(options =>
@@ -42,6 +42,6 @@ public void ConfigureServices(IServiceCollection services)
 
 ### Explicit Use
 
-```
+```c#
 var bar = serviceProvider.GetService<IBarService>();
 ```
