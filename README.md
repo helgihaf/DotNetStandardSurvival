@@ -105,6 +105,9 @@ Note: Set Copy to output directory = Always
       "Id":  "007",
       "Name":  "Bond"
     }
+  },
+  "ConnectionStrings": {
+    "BloggingDatabase": "Server=(localdb)\\mssqllocaldb;Database=EFGetStarted.ConsoleApp.NewDb;Trusted_Connection=True;"
   }
 }
 ```
@@ -125,13 +128,18 @@ namespace ConsoleApp5
                   .Build();
 
             string message = config["Message"];
+            
             // Note that the CustomSection is optional, it is simply shown here to demonstrate
             // how to navigate into sections.
             var customerSection = config.GetSection("CustomSection:Customer");
             var customer = customerSection.Get<Customer>();
 
+            var connectionString = config.GetConnectionString("BloggingDatabase");
+
             Console.WriteLine($"Message: {message}");
             Console.WriteLine($"Customer: {customer.Id}, {customer.Name}");
+            Console.WriteLine($"Connection string: {connectionString}");
+
             Console.ReadKey();
         }
     }
