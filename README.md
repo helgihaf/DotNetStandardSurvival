@@ -86,3 +86,60 @@ public class MainAgent
     }
 }
 ```
+
+## Configuration
+
+### Install
+```powershell
+install-package Microsoft.Extensions.Configuration.Json
+install-package Microsoft.Extensions.Configuration.Binder
+```
+
+### appsettings.json
+Note: Set Copy to output directory = Always
+```json
+{
+  "Message":  "Hello world",
+  "CustomSection":  {
+    "Customer": {
+      "Id":  "007",
+      "Name":  "Bond"
+    }
+  }
+}
+```
+
+### Code
+```c#
+using Microsoft.Extensions.Configuration;
+using System;
+
+namespace ConsoleApp5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            IConfiguration config = new ConfigurationBuilder()
+                  .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                  .Build();
+
+            string message = config["Message"];
+            // Note that the CustomSection is optional, it is simply shown here to demonstrate
+            // how to navigate into sections.
+            var customerSection = config.GetSection("CustomSection:Customer");
+            var customer = customerSection.Get<Customer>();
+
+            Console.WriteLine($"Message: {message}");
+            Console.WriteLine($"Customer: {customer.Id}, {customer.Name}");
+            Console.ReadKey();
+        }
+    }
+
+    public class Customer
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+    }
+}
+```
