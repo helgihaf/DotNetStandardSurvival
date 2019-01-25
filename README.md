@@ -63,8 +63,8 @@ static void Main(string[] args)
         .BuildServiceProvider();
 
     serviceProvider
-        .GetService<ILoggerFactory>()
-        .AddConsole(LogLevel.Debug);
+        .GetService<ILoggingBuilder>()
+        .AddConsole();
 }
 ```
 
