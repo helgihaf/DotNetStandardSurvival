@@ -59,12 +59,11 @@ using Microsoft.Extensions.Logging;
 static void Main(string[] args)
 {
     var serviceProvider = new ServiceCollection()
-        .AddLogging()
+        .AddLogging(configure => configure.AddConsole())
         .BuildServiceProvider();
-
-    serviceProvider
-        .GetService<ILoggingBuilder>()
-        .AddConsole();
+    
+    var mainAgent = new MainAgent(serviceProvider.GetRequiredService<ILogger<MainAgent>>());
+    //...
 }
 ```
 
