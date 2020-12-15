@@ -130,8 +130,8 @@ namespace ConsoleApp5
             
             // Note that the CustomSection is optional, it is simply shown here to demonstrate
             // how to navigate into sections.
-            var customerSection = config.GetSection("CustomSection:Customer");
-            var customer = customerSection.Get<Customer>();
+            var customer = new Customer();
+            config.GetSection("CustomSection:Customer").Bind(customer);     // You must install Microsoft.Extensions.Configuration.Binder for this to work
 
             var connectionString = config.GetConnectionString("BloggingDatabase");
 
