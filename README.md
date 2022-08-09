@@ -7,7 +7,7 @@
 install-package Microsoft.Extensions.DependencyInjection
 ```
 
-### Setup (console app)
+### Setup Console App
 ```c#
 static void Main(string[] args)
 {
@@ -20,7 +20,26 @@ static void Main(string[] args)
 }
 ```
 
-### Setup (web app)
+### Setup Console App with Host
+```c#
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+var host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices((context, services) =>
+    {
+        services.AddLogging();
+        services.Configure<MyClass.Settings>(context.Configuration.GetSection("MyApp:MySettings"));
+        services.AddTransient<IMyService, MyServicep>();
+    })
+    .Build();
+
+var service = host.Services.GetRequiredService<IMyService>();
+await service.ExecuteAsync();
+```
+
+### Setup Web App
 ```c#
 public void ConfigureServices(IServiceCollection services)
 {
