@@ -14,3 +14,12 @@ Here are the key differences between records and classes in C#:
 ##	With-Expressions:
 *	Records: Support with expressions to create a copy of an object with some properties modified.
 *	Classes: Do not support with expressions natively.
+## Serialization with System.Text.Json
+* Identical for both records and classes
+## Deserialization with System.Text.Json
+* Records: Tricky for records that have primary constructors because deserialization does not invoke the primary constuctor. Rather it tries to change the immutable properties which causes an exception when they are used. Possible solutions:
+  * Use a parameterless constructor and init properties - not ideal since we love primary constructors with auto properties.
+  * Mark the primary constructor with `[JsonConstructor]`. This is the recommended approach.
+  * Decorate parameter properties in primary constructors as in `public record PersonRecord([property: JsonPropertyName("Name")] string Name)`.
+  * Use `var options = new JsonSerializerOptions { IncludeFields = true };` to allow the serializer to work with private fields. Not recommended.
+* Classes: No problem for Poco classes.
