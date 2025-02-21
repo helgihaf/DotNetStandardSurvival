@@ -17,5 +17,5 @@ Here are the key differences between records and classes in C#:
 ## Serialization with System.Text.Json
 * Identical for both records and classes
 ## Deserialization with System.Text.Json
-* Records: Deserialized using primary constructor.
+* Records: Deserialized using primary constructor. Explicit properties marked `init` also work.
 * Classes: Require a parameterless constructor (not explicitly defined) or a custom converter.
